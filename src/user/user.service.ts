@@ -8,7 +8,6 @@ import { SendEmail } from '../common/utils/sendEmail';
 import { EmailWithOtp } from './schemas/emailOtpSchemas';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { TokenAuthorization } from 'src/middlewares/tokenAuthentication';
 
 @Injectable()
 export class UserService {
@@ -19,7 +18,6 @@ export class UserService {
     private readonly responseHandler: ResponseHandler,
     private readonly commonHelper: CommonHelper,
     private readonly sendEmail: SendEmail,
-    private readonly tokenAuthorization: TokenAuthorization,
   ) {}
 
   async sendOtpOnMail(res: any, email: any) {
@@ -112,17 +110,6 @@ export class UserService {
       'Login successfull',
       userToken,
     );
-  }
-
-  async changePassword(res:any, changePasswordDto:any){
-    console.log('changePasswordDto------------>>>', changePasswordDto);
-    return this.responseHandler.successResponse(
-      res,
-      'change successfull',
-    );
-    
-    // await this.tokenAuthorization.verifyToken(res);
-
   }
 
 }
